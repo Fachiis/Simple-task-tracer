@@ -37,10 +37,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Third-party apps
-    "rest_framework",
+    "django.contrib.sites",
+    # 3rd-party apps
     "debug_toolbar",
-    # Local apps
+    "rest_framework",
+    "rest_framework.authtoken",
+    "rest_auth",
+    # Local
     "users.apps.UsersConfig",
     "tasks.apps.TasksConfig",
 ]
@@ -131,8 +134,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
     # ...
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+}
+
+# TODO: Work on celery tasks

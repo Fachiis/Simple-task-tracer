@@ -8,7 +8,6 @@ django = "*"
 djangorestframework = "*"
 celery = "*"
 django-rest-auth = "*"
-drf-nested-routers = "*"
 
 [dev-packages]
 pylint = "*"

@@ -4,7 +4,7 @@
 
 ## Features
 
-- Django 4.0, Python 3.9, Djangorestframework 3.13, Djangorestauth 0.9, Celery 5.2, 
+- Django 4.0, Python 3.9, Djangorestframework 3.13, Djangorestauth 0.9, Celery 5.2, RabbitMQ
 - Install via [Pipenv](https://pypi.org/project/pip/)
 - User login and logout
 - Admin interface
@@ -33,9 +33,15 @@ $ pipenv shell
 (Simple_task_tracker) $ python manage.py migrate
 (Simple_task_tracker) $ python manage.py createsuperuser
 (Simple_task_tracker) $ python manage.py runserver
+
 # Load the site at http://127.0.0.1:8000/api/v1/
 ```
 
+Open another terminal and run the following commands to start the celery server. Make sure message broker (either RabbitMQ or Redis) is running.
+
+```
+(Simple_task_tracker) $ celery -A simple_task_tracker worker -l info
+```
 ## Setup
 
 ```
@@ -45,9 +51,15 @@ $ pipenv shell
 # Create a Superuser
 (Simple_task_tracker) $ python manage.py createsuperuser
 
-# Confirm everything is working:
+# Start Django Server:
 (Simple_task_tracker) $ python manage.py runserver
 
+Confirm the RabbitMQ or Redis server is running.
+
+# Start Celery Server:
+(Simple_task_tracker) $ celery -A simple_task_tracker worker -l info
+
+Confirm everything is running and working.
 # Load the site at http://127.0.0.1:8000/api/v1/
 ```
 Enjoy the Simple_task_tracker!

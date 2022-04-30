@@ -27,7 +27,7 @@ class Task(models.Model):
         (TASK_DONE, "Done"),
     ]
     name = models.CharField(max_length=255)
-    team = models.ForeignKey(Team, on_delete=models.PROTECT)
+    team = models.ForeignKey(Team, on_delete=models.PROTECT, related_name="tasks")
     team_members = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="team_members"
     )
